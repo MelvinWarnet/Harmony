@@ -1,12 +1,16 @@
-import Label from "@/components/Label";
-import React from "react";
+import { useEffect } from "react";
+import { useRouter } from "expo-router";
 
-export default function HomeScreen() {
-  return (
-    <>
-      <Label text="Bienvenue" type="title" />
-      <Label text="Sous-titre" type="subtitle" />
-      <Label text="Texte classique" />
-    </>
-  );
+export default function TabsIndex() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      router.replace("/HomeScreen");
+    }, 0);
+
+    return () => clearTimeout(timeout);
+  }, [router]);
+
+  return null;
 }

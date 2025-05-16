@@ -1,4 +1,3 @@
-// Label.tsx
 import React from "react";
 import { Text, StyleSheet, TextStyle } from "react-native";
 
@@ -25,14 +24,16 @@ const Label: React.FC<LabelProps> = ({ text, type = "normal" }) => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 24,
+    fontSize: 34,
     fontWeight: "bold",
     color: "#000",
+    textAlign: "center",
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "600",
     color: "#333",
+    textAlign: "center",
   },
   normal: {
     fontSize: 14,
