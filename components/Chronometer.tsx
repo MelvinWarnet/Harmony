@@ -1,59 +1,110 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import Button from '@/components/Button';
+// Chronometer.tsx
+import React, { useEffect, useState, useRef } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
+const formatTime = (seconds: number) => {
+  const hrs = Math.floor(seconds / 3600).toString().padStart(2, '0');
+  const mins = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+  const secs = (seconds % 60).toString().padStart(2, '0');
+  return `${hrs}:${mins}:${secs}`;
+};
 
-export default function Chronometer() {
-  const [secondsElapsed, setSecondsElapsed] = useState(0);
+const Chronometer = () => {
   const [isRunning, setIsRunning] = useState(true);
-  const intervalRef = useRef<number | null>(null);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const widthAnim = useRef(new Animated.Value(250)).current;
 
   useEffect(() => {
+    let timer: number;
     if (isRunning) {
-      intervalRef.current = setInterval(() => {
-        setSecondsElapsed((prev) => prev + 1);
-      }, 1000);
-    } else {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      timer = setInterval(() => setSeconds(prev => prev + 1), 1000);
     }
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+    return () => clearInterval(timer);
   }, [isRunning]);
 
-  const toggle = () => setIsRunning((prev) => !prev);
+  const toggleRunning = () => setIsRunning(prev => !prev);
 
-  const formatTime = (totalSeconds: number) => {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+  const toggleCollapse = () => {
+    Animated.timing(widthAnim, {
+      toValue: isCollapsed ? 250 : 120,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+    setIsCollapsed(prev => !prev);
   };
 
-  const pad = (num: number) => num.toString().padStart(2, "0");
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.time}>{formatTime(secondsElapsed)}</Text>
-      <Button iconName={isRunning ? "pause" : "play"} onPress={toggle} />
+  <Animated.View style={[styles.container, { width: widthAnim }]}>
+    <View style={styles.inner}>
+      <Icon name="time-outline" style={styles.clockIcon}/>
+      <View style={styles.left}>
+        {!isCollapsed && (
+          <View style={styles.timeRow}>
+            <Text style={styles.time}>{formatTime(seconds)}</Text>
+          </View>
+        )}
+      </View>
+      <TouchableOpacity style={styles.button} onPress={toggleRunning}>
+        <Icon name={isRunning ? 'pause' : 'play'} size={18} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={toggleCollapse}>
+        <Icon
+          name={isCollapsed ? 'chevron-forward' : 'chevron-back'}
+          size={24}
+          color="white"
+        />
+      </TouchableOpacity>
     </View>
-  );
-}
+  </Animated.View>
+);
+};
 
 const styles = StyleSheet.create({
-  container: { 
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    backgroundColor: "black", 
-    borderRadius: 30,
+  container: {
+    height: 50,
+    backgroundColor: 'black',
+    borderRadius: 25,
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
-  time: { 
-    fontSize: 48, 
-    fontWeight: "bold",
-    color: "white",
+  inner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
   },
+  left: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  time: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 6,
+    marginHorizontal: 10,
+  },
+  timeRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  },
+  clockIcon: {
+    color: 'white',
+    fontSize: 24,
+    marginRight: 5,
+  },
+
 });
+
+export default Chronometer;

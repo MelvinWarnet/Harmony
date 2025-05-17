@@ -38,7 +38,7 @@ export default function useMusicGenerator() {
       progression.push(availableNumerals[idx]);
     }
   
-    return progression.join(' ');
+    return progression.join(' - ');
   }, []);
 
   return {

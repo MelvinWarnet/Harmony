@@ -37,19 +37,19 @@ export default function TrainingScreen() {
 
         <View style={styles.box}>
           <Label text="Fondamentale" type="subtitle" />
-          <Label text={note} type="normal" />
+          <Label text={note} type="randomValue" />
           <Button iconName="reload" onPress={reloadNote} />
         </View>
 
         <View style={styles.box}>
           <Label text="Gamme" type="subtitle" />
-          <Label text={scale} type="normal" />
+          <Label text={scale} type="randomValue" />
           <Button iconName="reload" onPress={reloadScale} />
         </View>
 
         <View style={styles.box}>
           <Label text="Progression" type="subtitle" />
-          <Label text={progression} type="normal" />
+          <Label text={progression} type="randomValue" />
           <Button iconName="reload" onPress={reloadProgression} />
         </View>
 

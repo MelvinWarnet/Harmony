@@ -3,7 +3,7 @@ import { Text, StyleSheet, TextStyle } from "react-native";
 
 type LabelProps = {
   text: string;
-  type?: "title" | "subtitle" | "normal";
+  type?: "title" | "subtitle" | "normal" | "randomValue";
 };
 
 const Label: React.FC<LabelProps> = ({ text, type = "normal" }) => {
@@ -14,6 +14,9 @@ const Label: React.FC<LabelProps> = ({ text, type = "normal" }) => {
       case "subtitle":
         return styles.subtitle;
       case "normal":
+        return styles.normal;
+      case "randomValue":
+        return styles.randomValue; // Assuming you want to use the normal style for random strings
       default:
         return styles.normal;
     }
@@ -38,6 +41,12 @@ const styles = StyleSheet.create({
   normal: {
     fontSize: 14,
     color: "#555",
+  },
+  randomValue: {
+    fontSize: 30,
+    color: "#555",
+    fontStyle: "italic",
+    fontWeight: "bold",
   },
 });
 
