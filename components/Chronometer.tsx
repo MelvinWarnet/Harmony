@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, View, Button, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+import Button from '@/components/Button';
+
 
 export default function Chronometer() {
   const [secondsElapsed, setSecondsElapsed] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
   const intervalRef = useRef<number | null>(null);
-
 
   useEffect(() => {
     if (isRunning) {
@@ -35,12 +36,24 @@ export default function Chronometer() {
   return (
     <View style={styles.container}>
       <Text style={styles.time}>{formatTime(secondsElapsed)}</Text>
-      <Button title={isRunning ? "Pause" : "Reprendre"} onPress={toggle} />
+      <Button iconName={isRunning ? "pause" : "play"} onPress={toggle} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { alignItems: "center", justifyContent: "center", padding: 20 },
-  time: { fontSize: 48, fontWeight: "bold", marginBottom: 20 },
+  container: { 
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    backgroundColor: "black", 
+    borderRadius: 30,
+  },
+  time: { 
+    fontSize: 48, 
+    fontWeight: "bold",
+    color: "white",
+  },
 });
