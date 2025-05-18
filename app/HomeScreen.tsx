@@ -5,15 +5,23 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 export default function HomeScreen() {
+
   return (
     <View style={styles.page}>
       <Label text="Harmony" type="title" />
 
       <View style={styles.content}>
+        
+        
         <Button
         iconName="play-circle-outline"
         text="Commencer l'entraînement aléatoire"
         onPress={() => router.push("/TrainingScreen")}
+        />
+        <Button
+        iconName="music"
+        text="Lecture de notes"
+        onPress={() => router.push("/StaffReadingScreen")}
         />
       </View>
     </View>
