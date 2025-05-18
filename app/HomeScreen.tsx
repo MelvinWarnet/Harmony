@@ -5,7 +5,6 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 export default function HomeScreen() {
-
   return (
     <View style={styles.page}>
       <Label text="Harmony" type="title" />
@@ -24,7 +23,9 @@ export default function HomeScreen() {
         onPress={() => router.push("/StaffReadingScreen")}
         />
       </View>
+
     </View>
+      
   );
 }
 
@@ -32,7 +33,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    padding: 16,
   },
   content: {
     flex: 1,

@@ -1,11 +1,12 @@
 import Chronometer from '@/components/Chronometer';
 import Label from '@/components/Label';
 import Button from '@/components/Button';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet} from 'react-native';
 import { router } from 'expo-router';
 import Staff from "@/components/Staff";
 import { getRandomNote } from '@/utils/functionOnNotes';
 import { useState } from 'react';
+import Piano from '@/components/Piano';
 
 export default function StaffReadingScreen() {
   const [randomNote, setRandomNote] = useState(getRandomNote());
@@ -24,7 +25,7 @@ export default function StaffReadingScreen() {
   };
 
   return (
-    <ScrollView style={styles.page}>
+    <View style={styles.page}>
       <Label text="Entraînement" type="title" />
       <Chronometer />
 
@@ -38,28 +39,19 @@ export default function StaffReadingScreen() {
         </View>
 
       </View>
-      <Button text="C" onPress={() => {handleButtonPress("C")}} />
-      <Button text="C#" onPress={() => {handleButtonPress("C#")}} />
-      <Button text="D" onPress={() => {handleButtonPress("D")}} />
-      <Button text="D#" onPress={() => {handleButtonPress("D#")}} />
-      <Button text="E" onPress={() => {handleButtonPress("E")}} />
-      <Button text="F" onPress={() => {handleButtonPress("F")}} />
-      <Button text="F#" onPress={() => {handleButtonPress("F#")}} />
-      <Button text="G" onPress={() => {handleButtonPress("G")}} />
-      <Button text="G#" onPress={() => {handleButtonPress("G#")}} />
-      <Button text="A" onPress={() => {handleButtonPress("A")}} />
-      <Button text="A#" onPress={() => {handleButtonPress("A#")}} />
-      <Button text="B" onPress={() => {handleButtonPress("B")}} />
+ 
+      <View>
+        <Piano onKeyPress={handleButtonPress} />
+      </View>
 
       <Button text="Arreter l'entrainement" onPress={() => {router.replace("/HomeScreen")}} />
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    padding: 16,
   },
   content: {
     display: 'flex',
