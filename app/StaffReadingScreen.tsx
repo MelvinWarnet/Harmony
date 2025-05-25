@@ -1,12 +1,15 @@
 import Chronometer from '@/components/Chronometer';
 import Label from '@/components/Label';
 import Button from '@/components/Button';
-import { View, StyleSheet} from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { router } from 'expo-router';
 import Staff from "@/components/Staff";
 import { getRandomNote } from '@/utils/functionOnNotes';
 import { useState } from 'react';
 import Piano from '@/components/Piano';
+import BaseScreen from '@/components/BaseScreen';
+import Banner from '@/components/Banner';
+import { SECONDARY_COLOR } from '@/constants/COLORS';
 
 export default function StaffReadingScreen() {
   const [randomNote, setRandomNote] = useState(getRandomNote());
@@ -25,42 +28,51 @@ export default function StaffReadingScreen() {
   };
 
   return (
-    <View style={styles.page}>
-      <Label text="Entraînement" type="title" />
-      <Chronometer />
-
-      <Label text="Score" type="title" />
-      <Label text={score.toString()} type="title" />
-
+    <BaseScreen backgroundImage={require('@/assets/images/bg_piano.jpg')}>
+      <Banner title="Reading training" />
       <View style={styles.content}>
-        
-        <View style={{ width: 300, height: 200 , marginBottom: 20}}>
+
+        <View style={styles.headContent}>
+          <Button text="Terminer" iconName='hand-back-left' onPress={() => {router.replace("/HomeScreen")}} />
+          <Chronometer />
+        </View>
+      
+
+        <Text style={styles.scoreText}>{"Score : " + score.toString()}</Text>
+          
+        <View style={styles.boxStaff}>
             <Staff clef='SOL' note={randomNote} />
         </View>
 
-      </View>
- 
-      <View>
         <Piano onKeyPress={handleButtonPress} />
       </View>
-
-      <Button text="Arreter l'entrainement" onPress={() => {router.replace("/HomeScreen")}} />
-    </View>
+    </BaseScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-  },
   content: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+  },
+  headContent: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding : 10,
+  },
+  scoreText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 15,
+    color: SECONDARY_COLOR,
+    fontFamily: 'YourCustomFont-Bold',
+  },
+  boxStaff: {
+    width: 300,
+    height: 200,
   },
 });

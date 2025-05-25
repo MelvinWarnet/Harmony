@@ -1,4 +1,5 @@
 // Chronometer.tsx
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '@/constants/COLORS';
 import React, { useEffect, useState, useRef } from 'react';
 import {
   View,
@@ -23,7 +24,7 @@ const Chronometer = () => {
   const widthAnim = useRef(new Animated.Value(250)).current;
 
   useEffect(() => {
-    let timer: number;
+    let timer: ReturnType<typeof setInterval>;
     if (isRunning) {
       timer = setInterval(() => setSeconds(prev => prev + 1), 1000);
     }
@@ -32,79 +33,62 @@ const Chronometer = () => {
 
   const toggleRunning = () => setIsRunning(prev => !prev);
 
-  const toggleCollapse = () => {
-    Animated.timing(widthAnim, {
-      toValue: isCollapsed ? 250 : 120,
-      duration: 300,
-      useNativeDriver: false,
-    }).start();
-    setIsCollapsed(prev => !prev);
-  };
+  const toggleCollapse = () => setIsCollapsed(prev => !prev);
 
   return (
-  <Animated.View style={[styles.container, { width: widthAnim }]}>
-    <View style={styles.inner}>
-      <Icon name="time-outline" style={styles.clockIcon}/>
-      <View style={styles.left}>
-        {!isCollapsed && (
-          <View style={styles.timeRow}>
-            <Text style={styles.time}>{formatTime(seconds)}</Text>
-          </View>
-        )}
-      </View>
-      <TouchableOpacity style={styles.button} onPress={toggleRunning}>
-        <Icon name={isRunning ? 'pause' : 'play'} size={18} color="black" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={toggleCollapse}>
-        <Icon
-          name={isCollapsed ? 'chevron-forward' : 'chevron-back'}
-          size={24}
-          color="white"
-        />
-      </TouchableOpacity>
-    </View>
+  <Animated.View style={styles.container}>
+    <Icon name="time-outline" style={styles.clockIcon}/>
+    {!isCollapsed && (
+        <Text style={styles.timeText}>{formatTime(seconds)}</Text>
+    )}
+    <TouchableOpacity style={styles.playButton} onPress={toggleRunning}>
+      <Icon name={isRunning ? 'pause' : 'play'} style={styles.playPauseIcon}/>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={toggleCollapse}>
+      <Icon
+        name={isCollapsed ? 'chevron-back' : 'chevron-forward'}
+        style={styles.chevronIcon}
+      />
+    </TouchableOpacity>
   </Animated.View>
 );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
-    backgroundColor: 'black',
-    borderRadius: 25,
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  inner: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
-  },
-  left: {
-    flex: 1,
-    alignItems: 'flex-start',
-  },
-  time: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  button: {
-    backgroundColor: 'white',
-    borderRadius: 15,
-    padding: 6,
-    marginHorizontal: 10,
-  },
-  timeRow: {
-  flexDirection: 'row',
-  alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 13,
+    paddingHorizontal: 16,
+    backgroundColor: PRIMARY_COLOR,
+    borderColor: SECONDARY_COLOR,
+    borderWidth: 1,
+    borderRadius: 999,
   },
   clockIcon: {
     color: 'white',
-    fontSize: 24,
-    marginRight: 5,
+    fontSize: 26,
   },
-
+  timeText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  playButton: {
+    backgroundColor: SECONDARY_COLOR,
+    borderRadius: 15,
+    padding: 2,
+    marginLeft: 8,
+  },
+  playPauseIcon: {
+    color: 'black',
+    fontSize: 18,
+  },
+  chevronIcon: {
+    color: 'white',
+    fontSize: 26,
+  }
 });
 
 export default Chronometer;

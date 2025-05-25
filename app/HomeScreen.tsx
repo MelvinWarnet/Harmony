@@ -1,39 +1,28 @@
+import Banner from "@/components/Banner";
+import BaseScreen from "@/components/BaseScreen";
 import Button from "@/components/Button";
-import Label from "@/components/Label";
 import { router } from "expo-router";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View style={styles.page}>
-      <Label text="Harmony" type="title" />
-
+    <BaseScreen backgroundImage={require('@/assets/images/bg_piano.jpg')}>
+      <Banner title="Harmony" />
       <View style={styles.content}>
-        
-        
-        <Button
-        iconName="play-circle-outline"
-        text="Commencer l'entraînement aléatoire"
-        onPress={() => router.push("/TrainingScreen")}
-        />
-        <Button
-        iconName="music"
-        text="Lecture de notes"
-        onPress={() => router.push("/StaffReadingScreen")}
-        />
+          <Button
+          iconName="music"
+          text="Lecture de notes"
+          onPress={() => router.push("/StaffReadingScreen")}
+          />
       </View>
-
-    </View>
+    </BaseScreen>
       
   );
 }
 
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-  },
   content: {
     flex: 1,
     alignItems: 'center',

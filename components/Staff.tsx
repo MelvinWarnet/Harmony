@@ -37,7 +37,7 @@ const Staff: React.FC<StaffProps> = ({ clef, note }) => {
   }
 
   return (
-    <Svg width="100%" height="100%" viewBox="0 0 250 170" style={{ backgroundColor: 'red' }}>
+    <Svg width="100%" height="100%" viewBox="0 0 250 170" style={{ backgroundColor: 'white'}}>
 
       <G transform="translate(24, 50)">
         <EmptyStaff />
