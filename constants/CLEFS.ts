@@ -1,0 +1,118 @@
+import { Clef, CLEF_TYPE } from "@/models/clef";
+
+export const CLEFS = new Map<string, Clef>([
+  ["G", {
+    id: "G",
+    type: CLEF_TYPE.G,
+    name: "Clef de Sol",
+    symbolStaffPosition: [34, 25],
+    noteStaffYPositions: new Map<string, number[]>([
+      ["C",              [70, 140]],
+      ["C_SHARP",        [70, 140]],
+      ["C_DOUBLE_SHARP", [70, 140]],
+      ["C_FLAT",         [70, 140]],
+      ["C_DOUBLE_FLAT",  [70, 140]],
+      ["C_NATURAL",      [70, 140]],
+
+      ["D",              [60, 130]],
+      ["D_SHARP",        [60, 130]],
+      ["D_DOUBLE_SHARP", [60, 130]],
+      ["D_FLAT",         [60, 130]],
+      ["D_DOUBLE_FLAT",  [60, 130]],
+      ["D_NATURAL",      [60, 130]],
+
+      ["E",              [50, 120]],
+      ["E_SHARP",        [50, 120]],
+      ["E_DOUBLE_SHARP", [50, 120]],
+      ["E_FLAT",         [50, 120]],
+      ["E_DOUBLE_FLAT",  [50, 120]],
+      ["E_NATURAL",      [50, 120]],
+
+      ["F",              [40, 110]],
+      ["F_SHARP",        [40, 110]],
+      ["F_DOUBLE_SHARP", [40, 110]],
+      ["F_FLAT",         [110, 40]],
+      ["F_DOUBLE_FLAT",  [40, 110]],
+      ["F_NATURAL",      [40, 110]],
+
+      ["G",              [30, 100]],
+      ["G_SHARP",        [30, 100]],
+      ["G_DOUBLE_SHARP", [30, 100]],
+      ["G_FLAT",         [100, 30]],
+      ["G_DOUBLE_FLAT",  [30, 100]],
+      ["G_NATURAL",      [30, 100]],
+
+      ["A",              [90, 20]],
+      ["A_SHARP",        [90, 20]],
+      ["A_DOUBLE_SHARP", [90, 20]],
+      ["A_FLAT",         [90, 20]],
+      ["A_DOUBLE_FLAT",  [90, 20]],
+      ["A_NATURAL",      [90, 20]],
+
+      ["B",              [80, 150, 10]],
+      ["B_SHARP",        [80, 150, 10]],
+      ["B_DOUBLE_SHARP", [80, 150, 10]],
+      ["B_FLAT",         [80, 150, 10]],
+      ["B_DOUBLE_FLAT",  [80, 150, 10]],
+      ["B_NATURAL",      [80, 150, 10]],
+    ]),
+  }],
+  ["F", {
+    id: "F",
+    type: CLEF_TYPE.F,
+    name: "Clef de Fa",
+    symbolStaffPosition: [34, 51],
+    noteStaffYPositions: new Map<string, number[]>([
+      ["C",              [90, 20]],
+      ["C_SHARP",        [90, 20]],
+      ["C_DOUBLE_SHARP", [90, 20]],
+      ["C_FLAT",         [90, 20]],
+      ["C_DOUBLE_FLAT",  [90, 20]],
+      ["C_NATURAL",      [90, 20]],
+
+      ["D",              [80, 150, 10]],
+      ["D_SHARP",        [80, 150, 10]],
+      ["D_DOUBLE_SHARP", [80, 150, 10]],
+      ["D_FLAT",         [80, 150, 10]],
+      ["D_DOUBLE_FLAT",  [80, 150, 10]],
+      ["D_NATURAL",      [80, 150, 10]],
+
+      ["E",              [70, 140]],
+      ["E_SHARP",        [70, 140]],
+      ["E_DOUBLE_SHARP", [70, 140]],
+      ["E_FLAT",         [70, 140]],
+      ["E_DOUBLE_FLAT",  [70, 140]],
+      ["E_NATURAL",      [70, 140]],
+
+      ["F",              [60, 130]],
+      ["F_SHARP",        [60, 130]],
+      ["F_DOUBLE_SHARP", [60, 130]],
+      ["F_FLAT",         [130, 60]],
+      ["F_DOUBLE_FLAT",  [60, 130]],
+      ["F_NATURAL",      [60, 130]],
+
+      ["G",              [50, 120]],
+      ["G_SHARP",        [50, 120]],
+      ["G_DOUBLE_SHARP", [50, 120]],
+      ["G_FLAT",         [120, 50]],
+      ["G_DOUBLE_FLAT",  [50, 120]],
+      ["G_NATURAL",      [50, 120]],
+
+      ["A",              [110, 40]],
+      ["A_SHARP",        [110, 40]],
+      ["A_DOUBLE_SHARP", [110, 40]],
+      ["A_FLAT",         [110, 40]],
+      ["A_DOUBLE_FLAT",  [110, 40]],
+      ["A_NATURAL",      [110, 40]],
+
+      ["B",              [100, 30]],
+      ["B_SHARP",        [100, 30]],
+      ["B_DOUBLE_SHARP", [100, 30]],
+      ["B_FLAT",         [100, 30]],
+      ["B_DOUBLE_FLAT",  [100, 30]],
+      ["B_NATURAL",      [100, 30]],
+
+    ]),
+  }],
+]);
+

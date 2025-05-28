@@ -1,30 +1,34 @@
 import Chronometer from '@/components/Chronometer';
-import Label from '@/components/Label';
 import Button from '@/components/Button';
 import { View, StyleSheet, Text } from 'react-native';
 import { router } from 'expo-router';
 import Staff from "@/components/Staff";
-import { getRandomNote } from '@/utils/functionOnNotes';
+import { getRandomClef, getRandomNoteFromRandomScale } from '@/utils/utilsFunction';
 import { useState } from 'react';
 import Piano from '@/components/Piano';
 import BaseScreen from '@/components/BaseScreen';
 import Banner from '@/components/Banner';
 import { SECONDARY_COLOR } from '@/constants/COLORS';
 
-export default function StaffReadingScreen() {
-  const [randomNote, setRandomNote] = useState(getRandomNote());
-  const [score, setScore] = useState(0);
 
+export default function StaffReadingScreen() {
+  const [randomClef, setRandomClef] = useState(getRandomClef);
+  const initial = getRandomNoteFromRandomScale();
+  const [randomScale, setRandomScale] = useState(initial.scale);
+  const [randomNote, setRandomNote] = useState(initial.note);
+  const [score, setScore] = useState(0);
 
   const handleButtonPress = (noteId: string) => {
     if (randomNote.id === noteId) {
-      setRandomNote(getRandomNote());
+      const newValues = getRandomNoteFromRandomScale();
+      setRandomClef(getRandomClef());
+      setRandomScale(newValues.scale);
+      setRandomNote(newValues.note);
       setScore(score + 1);
     }
     else {
       alert("Mauvaise réponse");
     }
-
   };
 
   return (
@@ -41,10 +45,16 @@ export default function StaffReadingScreen() {
         <Text style={styles.scoreText}>{"Score : " + score.toString()}</Text>
           
         <View style={styles.boxStaff}>
-            <Staff clef='SOL' note={randomNote} />
+            <Staff clef={randomClef} scale={randomScale} note={randomNote} />
         </View>
 
-        <Piano onKeyPress={handleButtonPress} />
+        {/*<Piano onKeyPress={handleButtonPress} />*/}
+        <Text>{randomScale.name}</Text>
+        <Button
+          text="Reload note"
+          onPress={() => handleButtonPress(randomNote.id)}
+        />
+
       </View>
     </BaseScreen>
   );
@@ -72,7 +82,7 @@ const styles = StyleSheet.create({
     fontFamily: 'YourCustomFont-Bold',
   },
   boxStaff: {
-    width: 300,
+    width: 400,
     height: 200,
   },
 });

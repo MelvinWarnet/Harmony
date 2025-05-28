@@ -1,4 +1,4 @@
-import { Note_evolv } from "@/models/note";
+import { Note } from "@/models/note";
 
 
 export enum SCALE_TYPE {
@@ -10,6 +10,6 @@ export enum SCALE_TYPE {
 export type Scale = {
   name: string;
   type: SCALE_TYPE;
-  key_signature: Note_evolv[];
-  notes: Note_evolv[];
+  key_signature: Note[]; // The notes in the key signature are ordered followin the order of the circle of fifths, starting from F# for SHARPS and B♭ for FLATS.
+  notes: Note[];
 }

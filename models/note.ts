@@ -1,12 +1,3 @@
-export type Note = {
-  id: string;
-  name: string;
-  staffPosition: {
-    GStaff: [x : number, y : number][];
-    FStaff: [x : number, y : number][];
-  }
-};
-
 export enum ACCIDENTAL {
   SHARP = '♯',
   DOUBLE_SHARP = '𝄪',
@@ -16,7 +7,8 @@ export enum ACCIDENTAL {
   NONE = '',
 }
 
-export type Note_evolv = {
+export type Note = {
+  id: string;
   accidental: ACCIDENTAL;
   name: string;
 
