@@ -1,16 +1,20 @@
 import React, { useRef, useEffect, useState } from "react";
 import { ScrollView, View, Dimensions, NativeSyntheticEvent, NativeScrollEvent } from "react-native";
 import Svg, { Rect } from "react-native-svg";
+import { NOTES } from "@/constants/NOTES";
+import { NOTE_ID } from "@/models/note";
+
 
 type PianoProps = {
-  onKeyPress: (noteId: string) => void;
+  onKeyPress: (noteIds: NOTE_ID[]) => void;
 };
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
-const whiteNotes = ["C", "D", "E", "F", "G", "A", "B"];
-const blackNotes = ["C#", "D#", "", "F#", "G#", "A#", ""];
+const whiteKeyIds = [NOTE_ID.C, NOTE_ID.D, NOTE_ID.E, NOTE_ID.F, NOTE_ID.G, NOTE_ID.A, NOTE_ID.B];
+const blackKeyIds = [NOTE_ID.C_SHARP, NOTE_ID.D_SHARP, null, NOTE_ID.F_SHARP, NOTE_ID.G_SHARP, NOTE_ID.A_SHARP, null];
+
 
 export default function Piano({ onKeyPress }: PianoProps) {
   const scrollRef = useRef<ScrollView>(null);
@@ -19,11 +23,11 @@ export default function Piano({ onKeyPress }: PianoProps) {
   const touchHeight = 250;
   const blackTouchWidth = 35;
   const blackTouchHeight = 160;
-  const totalWhiteKeys = totalOctaves * whiteNotes.length;
+  const totalWhiteKeys = totalOctaves * whiteKeyIds.length;
   const totalContentWidth = totalWhiteKeys * touchWidth;
 
   const [ready, setReady] = useState(false);
-  const [activeNote, setActiveNote] = useState<string | null>(null);
+  const [activeNote, setActiveNote] = useState<NOTE_ID | null>(null);
   const [scrollX, setScrollX] = useState(0);
 
   useEffect(() => {
@@ -33,11 +37,19 @@ export default function Piano({ onKeyPress }: PianoProps) {
     }
   }, [ready, totalContentWidth]);
 
-  const handleKeyPress = (note: string) => {
-    setActiveNote(note);
-    onKeyPress(note);
+  const getNoteWithEnharmonics = (noteId: NOTE_ID): NOTE_ID[] => {
+  const note = NOTES[noteId];
+  if (!note) return [noteId];
+  return [noteId, ...note.enharmonics];
+};
+
+  const handleKeyPress = (noteId: NOTE_ID) => {
+    setActiveNote(noteId);
+    console.log(NOTES[noteId]);
+    const equivalents = getNoteWithEnharmonics(noteId);
+    onKeyPress(equivalents);
     setTimeout(() => setActiveNote(null), 150);
-  };
+};
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     setScrollX(event.nativeEvent.contentOffset.x);
@@ -90,8 +102,8 @@ export default function Piano({ onKeyPress }: PianoProps) {
           <Svg width="100%" height="100%" viewBox={`0 0 ${totalContentWidth} ${touchHeight}`}>
             {/* Touches blanches */}
             {Array.from({ length: totalWhiteKeys }).map((_, i) => {
-              const noteName = whiteNotes[i % 7];
-              const isActive = activeNote === noteName;
+              const noteId = whiteKeyIds[i % 7];
+              const isActive = activeNote === noteId;
 
               return (
                 <Rect
@@ -102,18 +114,19 @@ export default function Piano({ onKeyPress }: PianoProps) {
                   height={touchHeight}
                   fill={isActive ? "#ddd" : "white"}
                   stroke="black"
-                  onPress={() => handleKeyPress(noteName)}
+                  onPress={() => handleKeyPress(noteId)}
                 />
               );
             })}
 
+
             {/* Touches noires */}
             {Array.from({ length: totalWhiteKeys }).map((_, i) => {
-              const blackNote = blackNotes[i % 7];
-              if (!blackNote) return null;
+              const noteId = blackKeyIds[i % 7];
+              if (!noteId) return null;
 
               const x = i * touchWidth + touchWidth - blackTouchWidth / 2;
-              const isActive = activeNote === blackNote;
+              const isActive = activeNote === noteId;
 
               return (
                 <Rect
@@ -123,10 +136,11 @@ export default function Piano({ onKeyPress }: PianoProps) {
                   width={blackTouchWidth}
                   height={blackTouchHeight}
                   fill={isActive ? "#444" : "black"}
-                  onPress={() => handleKeyPress(blackNote)}
+                  onPress={() => handleKeyPress(noteId)}
                 />
               );
             })}
+
           </Svg>
         </View>
       </ScrollView>

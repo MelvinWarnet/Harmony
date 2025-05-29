@@ -1,369 +1,400 @@
+import { Scale, SCALE_ID, SCALE_TYPE } from "@/models/scale";
+import { NOTES } from "@/constants/NOTES";
+import { NOTE_ID } from "@/models/note";
 
-import { Scale, SCALE_TYPE } from "@/models/scale";
-import { NOTES} from "@/constants/NOTES";
-
-export const SCALES = new Map<string, Scale>([
-  ["C_MAJOR", {
-    name: "Do Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [],
-    notes: [
-      NOTES.get("C")!,
-      NOTES.get("D")!,
-      NOTES.get("E")!,
-      NOTES.get("F")!,
-      NOTES.get("G")!,
-      NOTES.get("A")!,
-      NOTES.get("B")!
-    ],
-  }],
-  ["F_MAJOR", {
-    name: "Fa Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("B_FLAT")!
-    ],
-    notes: [
-      NOTES.get("F")!,
-      NOTES.get("G")!,
-      NOTES.get("A")!,
-      NOTES.get("B_FLAT")!,
-      NOTES.get("C")!,
-      NOTES.get("D")!,
-      NOTES.get("E")!
-    ],
-  }],
-  ["G_MAJOR", {
-    name: "Sol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("F_SHARP")!
-    ],
-    notes: [
-      NOTES.get("G")!,
-      NOTES.get("A")!,
-      NOTES.get("B")!,
-      NOTES.get("C")!,
-      NOTES.get("D")!,
-      NOTES.get("E")!,
-      NOTES.get("F_SHARP")!
-    ],
-  }],
-  ["B_FLAT_MAJOR", {
-    name: "Si bémol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("B_FLAT")!,
-      NOTES.get("E_FLAT")!
-    ],
-    notes: [
-      NOTES.get("B_FLAT")!,
-      NOTES.get("C")!,
-      NOTES.get("D")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("F")!,
-      NOTES.get("G")!,
-      NOTES.get("A")!
-    ],
-  }],
-  ["D_MAJOR", {
-    name: "Ré Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("F_SHARP")!,
-      NOTES.get("C_SHARP")!
-    ],
-    notes: [
-      NOTES.get("D")!,
-      NOTES.get("E")!,
-      NOTES.get("F_SHARP")!,
-      NOTES.get("G")!,
-      NOTES.get("A")!,
-      NOTES.get("B")!,
-      NOTES.get("C_SHARP")!
-    ],
-  }],
-  ["E_FLAT_MAJOR", {
-    name: "Mi bémol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("B_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("A_FLAT")!
-    ],
-    notes: [
-      NOTES.get("E_FLAT")!,
-      NOTES.get("F")!,
-      NOTES.get("G")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("B_FLAT")!,
-      NOTES.get("C")!,
-      NOTES.get("D")!
-    ],
-  }],
-  ["A_MAJOR", {
-    name: "La Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("F_SHARP")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("G_SHARP")!
-    ],
-    notes: [
-      NOTES.get("A")!,
-      NOTES.get("B")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("D")!,
-      NOTES.get("E")!,
-      NOTES.get("F_SHARP")!,
-      NOTES.get("G_SHARP")!
-    ],
-  }],
-  ["A_FLAT_MAJOR", {
-    name: "La bémol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("B_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("D_FLAT")!
-    ],
-    notes: [
-      NOTES.get("A_FLAT")!,
-      NOTES.get("B_FLAT")!,
-      NOTES.get("C")!,
-      NOTES.get("D_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("F")!,
-      NOTES.get("G")!
-    ],
-  }],
-  ["E_MAJOR", {
-    name: "Mi Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("F_SHARP")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("D_SHARP")!
-    ],
-    notes: [
-      NOTES.get("E")!,
-      NOTES.get("F_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("A")!,
-      NOTES.get("B")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("D_SHARP")!
-    ],
-  }],
-  ["D_FLAT_MAJOR", {
-    name: "Ré bémol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("B_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("D_FLAT")!
-    ],
-    notes: [
-      NOTES.get("D_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("F")!,
-      NOTES.get("G_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("B_FLAT")!,
-      NOTES.get("C")!
-    ],
-  }],
-  ["B_MAJOR", {
-    name: "Si Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("F_SHARP")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("A_SHARP")!
-    ],
-    notes: [
-      NOTES.get("B")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("E")!,
-      NOTES.get("F_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("A_SHARP")!
-    ],
-  }],
-  ["G_FLAT_MAJOR", {
-    name: "Sol bémol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("B_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("D_FLAT")!,
-      NOTES.get("G_FLAT")!
-    ],
-    notes: [
-      NOTES.get("G_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("B_FLAT")!,
-      NOTES.get("C")!,
-      NOTES.get("D_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("F")!
-    ],
-  }],
-  ["F_SHARP_MAJOR", {
-    name: "Fa dièse Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("F_SHARP")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("A_SHARP")!,
-      NOTES.get("E_SHARP")!
-    ],
-    notes: [
-      NOTES.get("F_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("A_SHARP")!,
-      NOTES.get("B")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("E_SHARP")!
-    ],
-  }],
-  ["C_FLAT_MAJOR", {
-    name: "Do bémol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("B_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("D_FLAT")!,
-      NOTES.get("G_FLAT")!,
-      NOTES.get("C_FLAT")!,
-      NOTES.get("F_FLAT")!
-
-    ],
-    notes: [
-      NOTES.get("C_FLAT")!,
-      NOTES.get("D_FLAT")!,
-      NOTES.get("E_FLAT")!,
-      NOTES.get("F_FLAT")!,
-      NOTES.get("G_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("B_FLAT")!
-    ],
-  }],
-  ["C_SHARP_MAJOR", {
-    name: "Do dièse Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [
-      NOTES.get("F_SHARP")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("A_SHARP")!,
-      NOTES.get("E_SHARP")!,
-      NOTES.get("B_SHARP")!
-    ],
-    notes: [
-      NOTES.get("C_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("E_SHARP")!,
-      NOTES.get("F_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("A_SHARP")!,
-      NOTES.get("B_SHARP")!
-    ],
-  }],
-  ["F_FLAT_MAJOR", {
-    name: "Fa bémol Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [],
-    notes: [
-      NOTES.get("F_FLAT")!,
-      NOTES.get("G_FLAT")!,
-      NOTES.get("A_FLAT")!,
-      NOTES.get("B_DOUBLE_FLAT")!,
-      NOTES.get("C_FLAT")!,
-      NOTES.get("D_FLAT")!,
-      NOTES.get("E_FLAT")!
-    ],
-  }],
-  ["A_SHARP_MAJOR", {
-    name: "La dièse Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [],
-    notes: [
-      NOTES.get("A_SHARP")!,
-      NOTES.get("B_SHARP")!,
-      NOTES.get("C_DOUBLE_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("E_SHARP")!,
-      NOTES.get("F_DOUBLE_SHARP")!,
-      NOTES.get("G_DOUBLE_SHARP")!
-    ],
-  }],
-  ["E_SHARP_MAJOR", {
-    name: "Mi dièse Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [],
-    notes: [
-      NOTES.get("E_SHARP")!,
-      NOTES.get("F_DOUBLE_SHARP")!,
-      NOTES.get("G_DOUBLE_SHARP")!,
-      NOTES.get("A_SHARP")!,
-      NOTES.get("B_SHARP")!,
-      NOTES.get("C_DOUBLE_SHARP")!,
-      NOTES.get("D_DOUBLE_SHARP")!
-    ],
-  }],
-  ["D_SHARP_MAJOR", {
-    name: "Ré dièse Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [],
-    notes: [
-      NOTES.get("D_SHARP")!,
-      NOTES.get("E_SHARP")!,
-      NOTES.get("F_DOUBLE_SHARP")!,
-      NOTES.get("G_SHARP")!,
-      NOTES.get("A_SHARP")!,
-      NOTES.get("B_SHARP")!,
-      NOTES.get("C_DOUBLE_SHARP")!
-    ],
-  }],
-  ["B_SHARP_MAJOR", {
-    name: "Si dièse Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [],
-    notes: [
-      NOTES.get("B_SHARP")!,
-      NOTES.get("C_DOUBLE_SHARP")!,
-      NOTES.get("D_DOUBLE_SHARP")!,
-      NOTES.get("E_SHARP")!,
-      NOTES.get("F_DOUBLE_SHARP")!,
-      NOTES.get("G_DOUBLE_SHARP")!,
-      NOTES.get("A_DOUBLE_SHARP")!
-    ],
-  }],
-  ["G_SHARP_MAJOR", {
-    name: "Sol dièse Majeur",
-    type: SCALE_TYPE.MAJOR,
-    key_signature: [],
-    notes: [
-      NOTES.get("G_SHARP")!,
-      NOTES.get("A_SHARP")!,
-      NOTES.get("B_SHARP")!,
-      NOTES.get("C_SHARP")!,
-      NOTES.get("D_SHARP")!,
-      NOTES.get("E_SHARP")!,
-      NOTES.get("F_DOUBLE_SHARP")!
-    ],
-  }],
-]);
+export const SCALES : Record<SCALE_ID, Scale> = {
+  [SCALE_ID.MAJOR_C] :
+    {
+      id: SCALE_ID.MAJOR_C,
+      name: "Do Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [],
+      notes: [
+        NOTES[NOTE_ID.C],
+        NOTES[NOTE_ID.D],
+        NOTES[NOTE_ID.E],
+        NOTES[NOTE_ID.F],
+        NOTES[NOTE_ID.G],
+        NOTES[NOTE_ID.A],
+        NOTES[NOTE_ID.B],
+      ],
+    },
+  [SCALE_ID.MAJOR_F] :
+    {
+      id: SCALE_ID.MAJOR_F,
+      name: "Fa Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [NOTES[NOTE_ID.B_FLAT]],
+      notes: [
+        NOTES[NOTE_ID.F],
+        NOTES[NOTE_ID.G],
+        NOTES[NOTE_ID.A],
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.C],
+        NOTES[NOTE_ID.D],
+        NOTES[NOTE_ID.E],
+      ],
+    },
+  [SCALE_ID.MAJOR_G] :
+    {
+      id: SCALE_ID.MAJOR_G,
+      name: "Sol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [NOTES[NOTE_ID.F_SHARP]],
+      notes: [
+        NOTES[NOTE_ID.G],
+        NOTES[NOTE_ID.A],
+        NOTES[NOTE_ID.B],
+        NOTES[NOTE_ID.C],
+        NOTES[NOTE_ID.D],
+        NOTES[NOTE_ID.E],
+        NOTES[NOTE_ID.F_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_B_FLAT] :
+    {
+      id: SCALE_ID.MAJOR_B_FLAT,
+      name: "Si bémol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [NOTES[NOTE_ID.B_FLAT], NOTES[NOTE_ID.E_FLAT]],
+      notes: [
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.C],
+        NOTES[NOTE_ID.D],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.F],
+        NOTES[NOTE_ID.G],
+        NOTES[NOTE_ID.A],
+      ],
+    },
+  [SCALE_ID.MAJOR_D] :
+    {
+      id: SCALE_ID.MAJOR_D,
+      name: "Ré Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [NOTES[NOTE_ID.F_SHARP], NOTES[NOTE_ID.C_SHARP]],
+      notes: [
+        NOTES[NOTE_ID.D],
+        NOTES[NOTE_ID.E],
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.G],
+        NOTES[NOTE_ID.A],
+        NOTES[NOTE_ID.B],
+        NOTES[NOTE_ID.C_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_E_FLAT] :
+    {
+      id: SCALE_ID.MAJOR_E_FLAT,
+      name: "Mi bémol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+      ],
+      notes: [
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.F],
+        NOTES[NOTE_ID.G],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.C],
+        NOTES[NOTE_ID.D],
+      ],
+    },
+  [SCALE_ID.MAJOR_A] :
+    {
+      id: SCALE_ID.MAJOR_A,
+      name: "La Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+      ],
+      notes: [
+        NOTES[NOTE_ID.A],
+        NOTES[NOTE_ID.B],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.D],
+        NOTES[NOTE_ID.E],
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_A_FLAT] :
+    {
+      id: SCALE_ID.MAJOR_A_FLAT,
+      name: "La bémol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.D_FLAT],
+      ],
+      notes: [
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.C],
+        NOTES[NOTE_ID.D_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.F],
+        NOTES[NOTE_ID.G],
+      ],
+    },
+  [SCALE_ID.MAJOR_E] :
+    {
+      id: SCALE_ID.MAJOR_E,
+      name: "Mi Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+      ],
+      notes: [
+        NOTES[NOTE_ID.E],
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.A],
+        NOTES[NOTE_ID.B],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_D_FLAT] :
+    {
+      id: SCALE_ID.MAJOR_D_FLAT,
+      name: "Ré bémol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.D_FLAT],
+      ],
+      notes: [
+        NOTES[NOTE_ID.D_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.F],
+        NOTES[NOTE_ID.G_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.C],
+      ],
+    },
+  [SCALE_ID.MAJOR_B] :
+    {
+      id: SCALE_ID.MAJOR_B,
+      name: "Si Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+      ],
+      notes: [
+        NOTES[NOTE_ID.B],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.E],
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_G_FLAT] :
+    {
+      id: SCALE_ID.MAJOR_G_FLAT,
+      name: "Sol bémol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.D_FLAT],
+        NOTES[NOTE_ID.G_FLAT],
+      ],
+      notes: [
+        NOTES[NOTE_ID.G_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.C],
+        NOTES[NOTE_ID.D_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.F],
+      ],
+    },
+  [SCALE_ID.MAJOR_F_SHARP] :
+    {
+      id: SCALE_ID.MAJOR_F_SHARP,
+      name: "Fa dièse Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+      ],
+      notes: [
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.B],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_C_FLAT] :
+    {
+      id: SCALE_ID.MAJOR_C_FLAT,
+      name: "Do bémol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.B_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.D_FLAT],
+        NOTES[NOTE_ID.G_FLAT],
+        NOTES[NOTE_ID.C_FLAT],
+        NOTES[NOTE_ID.F_FLAT],
+      ],
+      notes: [
+        NOTES[NOTE_ID.C_FLAT],
+        NOTES[NOTE_ID.D_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+        NOTES[NOTE_ID.F_FLAT],
+        NOTES[NOTE_ID.G_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.B_FLAT],
+      ],
+    },
+  [SCALE_ID.MAJOR_C_SHARP] :
+    {
+      id: SCALE_ID.MAJOR_C_SHARP,
+      name: "Do dièse Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+        NOTES[NOTE_ID.B_SHARP],
+      ],
+      notes: [
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+        NOTES[NOTE_ID.F_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.B_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_F_FLAT] :
+    {
+      id: SCALE_ID.MAJOR_F_FLAT,
+      name: "Fa bémol Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [],
+      notes: [
+        NOTES[NOTE_ID.F_FLAT],
+        NOTES[NOTE_ID.G_FLAT],
+        NOTES[NOTE_ID.A_FLAT],
+        NOTES[NOTE_ID.B_DOUBLE_FLAT],
+        NOTES[NOTE_ID.C_FLAT],
+        NOTES[NOTE_ID.D_FLAT],
+        NOTES[NOTE_ID.E_FLAT],
+      ],
+    },
+  [SCALE_ID.MAJOR_A_SHARP] :
+    {
+      id: SCALE_ID.MAJOR_A_SHARP,
+      name: "La dièse Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [],
+      notes: [
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.B_SHARP],
+        NOTES[NOTE_ID.C_DOUBLE_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+        NOTES[NOTE_ID.F_DOUBLE_SHARP],
+        NOTES[NOTE_ID.G_DOUBLE_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_E_SHARP] :
+    {
+      id: SCALE_ID.MAJOR_E_SHARP,
+      name: "Mi dièse Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [],
+      notes: [
+        NOTES[NOTE_ID.E_SHARP],
+        NOTES[NOTE_ID.F_DOUBLE_SHARP],
+        NOTES[NOTE_ID.G_DOUBLE_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.B_SHARP],
+        NOTES[NOTE_ID.C_DOUBLE_SHARP],
+        NOTES[NOTE_ID.D_DOUBLE_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_D_SHARP] :
+    {
+      id: SCALE_ID.MAJOR_D_SHARP,
+      name: "Ré dièse Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [],
+      notes: [
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+        NOTES[NOTE_ID.F_DOUBLE_SHARP],
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.B_SHARP],
+        NOTES[NOTE_ID.C_DOUBLE_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_B_SHARP] :
+    {
+      id: SCALE_ID.MAJOR_B_SHARP,
+      name: "Si dièse Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [],
+      notes: [
+        NOTES[NOTE_ID.B_SHARP],
+        NOTES[NOTE_ID.C_DOUBLE_SHARP],
+        NOTES[NOTE_ID.D_DOUBLE_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+        NOTES[NOTE_ID.F_DOUBLE_SHARP],
+        NOTES[NOTE_ID.G_DOUBLE_SHARP],
+        NOTES[NOTE_ID.A_DOUBLE_SHARP],
+      ],
+    },
+  [SCALE_ID.MAJOR_G_SHARP] :
+    {
+      id: SCALE_ID.MAJOR_G_SHARP,
+      name: "Sol dièse Majeur",
+      type: SCALE_TYPE.MAJOR,
+      key_signature: [],
+      notes: [
+        NOTES[NOTE_ID.G_SHARP],
+        NOTES[NOTE_ID.A_SHARP],
+        NOTES[NOTE_ID.B_SHARP],
+        NOTES[NOTE_ID.C_SHARP],
+        NOTES[NOTE_ID.D_SHARP],
+        NOTES[NOTE_ID.E_SHARP],
+        NOTES[NOTE_ID.F_DOUBLE_SHARP],
+      ],
+    },
+};

@@ -9,6 +9,12 @@ import Piano from '@/components/Piano';
 import BaseScreen from '@/components/BaseScreen';
 import Banner from '@/components/Banner';
 import { SECONDARY_COLOR } from '@/constants/COLORS';
+import { CLEF_ID } from '@/models/clef';
+import { CLEFS } from '@/constants/CLEFS';
+import { SCALES } from '@/constants/SCALES';
+import { SCALE_ID } from '@/models/scale';
+import { NOTE_ID } from '@/models/note';
+import { NOTES } from '@/constants/NOTES';
 
 
 export default function StaffReadingScreen() {
@@ -18,8 +24,9 @@ export default function StaffReadingScreen() {
   const [randomNote, setRandomNote] = useState(initial.note);
   const [score, setScore] = useState(0);
 
-  const handleButtonPress = (noteId: string) => {
-    if (randomNote.id === noteId) {
+  const handleButtonPress = (noteIds: NOTE_ID[]) => {
+    console.log("Button pressed with note IDs:", noteIds);
+    if (noteIds.find(id => id === randomNote.id)) {
       const newValues = getRandomNoteFromRandomScale();
       setRandomClef(getRandomClef());
       setRandomScale(newValues.scale);
@@ -48,12 +55,12 @@ export default function StaffReadingScreen() {
             <Staff clef={randomClef} scale={randomScale} note={randomNote} />
         </View>
 
-        {/*<Piano onKeyPress={handleButtonPress} />*/}
-        <Text>{randomScale.name}</Text>
+        <Piano onKeyPress={handleButtonPress} />
+        {/*<Text>{randomScale.name}</Text>
         <Button
           text="Reload note"
           onPress={() => handleButtonPress(randomNote.id)}
-        />
+        />*/}
 
       </View>
     </BaseScreen>
