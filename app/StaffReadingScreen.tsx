@@ -56,11 +56,11 @@ export default function StaffReadingScreen() {
         </View>
 
         <Piano onKeyPress={handleButtonPress} />
-        {/*<Text>{randomScale.name}</Text>
+        <Text>{randomScale.name}</Text>
         <Button
           text="Reload note"
-          onPress={() => handleButtonPress(randomNote.id)}
-        />*/}
+          onPress={() => handleButtonPress([randomNote.id])}
+        />
 
       </View>
     </BaseScreen>

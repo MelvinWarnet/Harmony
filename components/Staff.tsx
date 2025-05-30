@@ -10,6 +10,7 @@ import DoubleSharpSVG from '@/assets/svg/staff_generator/double_sharp.svg';
 import DoubleFlatSVG from '@/assets/svg/staff_generator/double_flat.svg';
 import NaturalSVG from '@/assets/svg/staff_generator/natural.svg';
 import MusicNote from '@/assets/svg/staff_generator/music_note.svg';
+import AdditionalLineSVG from '@/assets/svg/staff_generator/additional_line.svg';
 import { ACCIDENTAL, Note } from '@/models/note';
 import { Clef, CLEF_ID } from '@/models/clef';
 import { Scale } from '@/models/scale';
@@ -21,6 +22,10 @@ type StaffProps = {
 };
 
 const Staff: React.FC<StaffProps> = ({ clef, scale, note }) => {
+  const emptyStaffPositionX = 24;
+  const emptyStaffPositionY = 50;
+
+
   let ClefSVGComponent;
   switch (clef.id) {
     case CLEF_ID.G:
@@ -107,17 +112,29 @@ const Staff: React.FC<StaffProps> = ({ clef, scale, note }) => {
 
       accidentalPositionX = notePositionX + accidentalPositionOffsetX;
       accidentalPositionY = notePositionY + accidentalPositionOffsetY;
-        
     }
   }
 
-  
+  let additionalLineSVGComponent;
+  let additionalLineSVGComponentPositionX;
+  let additionalLineSVGComponentPositionY;
+  if (notePositionY < emptyStaffPositionY - 20) {
+    additionalLineSVGComponent = AdditionalLineSVG;
+    additionalLineSVGComponentPositionX = notePositionX - 7;
+    additionalLineSVGComponentPositionY = emptyStaffPositionY - 20;
+  } 
+  else if (notePositionY > emptyStaffPositionY + 80) {
+    additionalLineSVGComponent = AdditionalLineSVG;
+    additionalLineSVGComponentPositionX = notePositionX - 7;
+    additionalLineSVGComponentPositionY = emptyStaffPositionY + 80 + 20;
+  }
+
 
 
   return (
     <Svg width="100%" height="100%" viewBox="0 0 400 170" style={{ backgroundColor: 'white'}}>
 
-      <G transform="translate(24, 50)">
+      <G transform={`translate(${emptyStaffPositionX}, ${emptyStaffPositionY})`}>
         <EmptyStaff />
       </G>
 
@@ -137,11 +154,18 @@ const Staff: React.FC<StaffProps> = ({ clef, scale, note }) => {
         </G>
       )}
 
+      {additionalLineSVGComponent && (
+        <G transform={`translate(${additionalLineSVGComponentPositionX}, ${additionalLineSVGComponentPositionY})`}>
+          <AdditionalLineSVG />
+        </G>
+      )}
+
       <G transform={`translate(${notePositionX}, ${notePositionY})`}>
         <MusicNote />
       </G>
     </Svg>
   );
-};
+
+}
 
 export default Staff;
