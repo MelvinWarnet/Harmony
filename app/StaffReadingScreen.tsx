@@ -3,7 +3,7 @@ import Button from '@/components/Button';
 import { View, StyleSheet, Text } from 'react-native';
 import { router } from 'expo-router';
 import Staff from "@/components/Staff";
-import { getRandomClef, getRandomNoteFromRandomScale } from '@/utils/utilsFunction';
+import { getRandomClef, getRandomNoteFromRandomScale, playNoteSound } from '@/utils/utilsFunction';
 import { useState } from 'react';
 import Piano from '@/components/Piano';
 import BaseScreen from '@/components/BaseScreen';
@@ -15,6 +15,7 @@ import { SCALES } from '@/constants/SCALES';
 import { SCALE_ID } from '@/models/scale';
 import { NOTE_ID } from '@/models/note';
 import { NOTES } from '@/constants/NOTES';
+
 
 
 export default function StaffReadingScreen() {
