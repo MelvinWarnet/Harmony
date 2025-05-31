@@ -3,7 +3,7 @@ import Button from '@/components/Button';
 import { View, StyleSheet, Text } from 'react-native';
 import { router } from 'expo-router';
 import Staff from "@/components/Staff";
-import { getRandomClef, getRandomNoteFromRandomScale, playNoteSound } from '@/utils/utilsFunction';
+import { getRandomClef, getRandomNoteFromRandomScale} from '@/utils/utilsFunction';
 import { useState } from 'react';
 import Piano from '@/components/Piano';
 import BaseScreen from '@/components/BaseScreen';
@@ -19,24 +19,33 @@ import { NOTES } from '@/constants/NOTES';
 
 
 export default function StaffReadingScreen() {
-  const [randomClef, setRandomClef] = useState(getRandomClef);
   const initial = getRandomNoteFromRandomScale();
   const [randomScale, setRandomScale] = useState(initial.scale);
   const [randomNote, setRandomNote] = useState(initial.note);
+  const [randomClef, setRandomClef] = useState(getRandomClef);
+  const [randomNotePositionYIndex, setRandomNotePositionYIndex] = useState(Math.floor(Math.random() * randomClef.noteStaffYPositions[randomNote.id].length));
   const [score, setScore] = useState(0);
+  const [answerColor, setAnswerColor] = useState('transparent');
+
 
   const handleButtonPress = (noteIds: NOTE_ID[]) => {
-    console.log("Button pressed with note IDs:", noteIds);
     if (noteIds.find(id => id === randomNote.id)) {
       const newValues = getRandomNoteFromRandomScale();
-      setRandomClef(getRandomClef());
+      const newClef = getRandomClef();
       setRandomScale(newValues.scale);
       setRandomNote(newValues.note);
+      setRandomClef(newClef);
+      setRandomNotePositionYIndex(Math.floor(Math.random() * newClef.noteStaffYPositions[newValues.note.id].length));
+
       setScore(score + 1);
+      setAnswerColor("rgba(0, 255, 0, 0.5)")
     }
     else {
-      alert("Mauvaise réponse");
+      setAnswerColor("rgba(255, 0, 0, 0.5)");
     }
+    setTimeout(() => {
+      setAnswerColor("transparent");
+    }, 400);
   };
 
   return (
@@ -53,15 +62,16 @@ export default function StaffReadingScreen() {
         <Text style={styles.scoreText}>{"Score : " + score.toString()}</Text>
           
         <View style={styles.boxStaff}>
-            <Staff clef={randomClef} scale={randomScale} note={randomNote} />
+            <Staff clef={randomClef} scale={randomScale} note={randomNote} notePositionYIndex={randomNotePositionYIndex} />
+            <View style={[styles.answerInfo, { backgroundColor: answerColor }]}/>
         </View>
 
         <Piano onKeyPress={handleButtonPress} />
-        <Text>{randomScale.name}</Text>
+        {/*<Text>{randomScale.name}</Text>
         <Button
           text="Reload note"
           onPress={() => handleButtonPress([randomNote.id])}
-        />
+        />*/}
 
       </View>
     </BaseScreen>
@@ -92,5 +102,13 @@ const styles = StyleSheet.create({
   boxStaff: {
     width: 400,
     height: 200,
+  },
+  answerInfo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(255, 0, 0, 0.5)',
   },
 });

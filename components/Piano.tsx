@@ -48,7 +48,6 @@ export default function Piano({ onKeyPress }: PianoProps) {
 
   const handleKeyPress = (noteId: NOTE_ID, octave: number) => {
     setActiveNote([noteId, octave]);
-    console.log(NOTES[noteId]);
     if (!isMuted) {
       playNoteSound(noteId, octave.toString());
     }

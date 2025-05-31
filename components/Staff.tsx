@@ -19,9 +19,10 @@ type StaffProps = {
   clef: Clef;
   scale: Scale;
   note: Note;
+  notePositionYIndex: number;
 };
 
-const Staff: React.FC<StaffProps> = ({ clef, scale, note }) => {
+const Staff: React.FC<StaffProps> = ({ clef, scale, note, notePositionYIndex }) => {
   const emptyStaffPositionX = 24;
   const emptyStaffPositionY = 50;
 
@@ -37,8 +38,6 @@ const Staff: React.FC<StaffProps> = ({ clef, scale, note }) => {
     default:
       throw new RangeError("Invalid clef type");
   }
-
-  console.log(note);
 
 
   let keySignaturePositionsX: number[] = [];
@@ -68,7 +67,7 @@ const Staff: React.FC<StaffProps> = ({ clef, scale, note }) => {
 
 
   let notePositionX = clef.symbolStaffPosition[0] + 270;
-  let notePositionY = clef.noteStaffYPositions[note.id][Math.floor(Math.random() * clef.noteStaffYPositions[note.id].length)];
+  let notePositionY = clef.noteStaffYPositions[note.id][notePositionYIndex];
 
 
   let accidentalPositionX;
